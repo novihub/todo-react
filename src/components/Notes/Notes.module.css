@@ -1,0 +1,44 @@
+.Notes {
+	display: flex;
+	flex-direction: column;
+	width: 520px;
+	margin: 0 auto;
+	margin-top: 80px;
+}
+
+.Note {
+	display: flex;
+	align-items: center;
+}
+
+.Input {
+	display: inline-block;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #6C63FF;
+	border-radius: 5px;
+	width: 26px;
+	height: 26px;
+}
+
+.Note span {
+	color: white;
+	font-size: 20px;
+	margin-left: 20px;
+}
+
+.underline {
+	width: 100%;
+	background-color: #6C63FF;
+	height: 1px;
+	margin-top: 10px;
+	border-radius: 1px;
+	opacity: 0.5;
+}
+
+.NoteWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-inline: 10px;
+}
