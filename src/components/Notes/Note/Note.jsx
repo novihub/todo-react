@@ -1,33 +1,38 @@
-import cn from 'classnames';
-import React from 'react';
-import { FaCheck } from 'react-icons/fa6';
-import classes from '../Notes.module.css';
+import React from 'react'
+import { CiEdit, CiTrash } from 'react-icons/ci'
+import { FaCheck } from 'react-icons/fa6'
 
-const Note = ({ note, toggleCheck, deleteNote }) => {
-  return (
-    <div className={classes.NoteWrapper}>
-      <div className={classes.Note}>
-        <div
-          className={cn(classes.Input, {
-            [classes.checkedBackground]: note.isChecked,
-          })}
-          onClick={toggleCheck}
-        >
-          <div className={classes.CheckIconContainer}>
-            {note.isChecked && <FaCheck className={classes.checkIcon} />}
-          </div>
-        </div>
+import classes from './Note.module.css'
 
-        <span className={cn({ [classes.CheckedText]: note.isChecked })}>
-          {note.typedText || 'The first note'}
-        </span>
-      </div>
-      <div className={classes.tools}>
-        <button>Edit</button>
-        <button onClick={deleteNote}>Delete</button>
-      </div>
-    </div>
-  );
-};
+const Note = ({ note, isChecked, onDelete }) => {
+	return (
+		<div className={classes.NoteContainer}>
+			<div className={classes.Note}>
+				<div className={classes.NoteLeft}>
+					<div
+						className={`${classes.CustomCheckbox} ${
+							note.isChecked ? classes.Checked : ''
+						}`}
+						onClick={isChecked}
+					>
+						<div className={classes.CustomCheck}>
+							{note.isChecked && <FaCheck />}
+						</div>
+					</div>
+					<p className={`${note.isChecked ? classes.textChecked : ''}`}>{note.text}</p>
+				</div>
+				<div className={classes.NoteTools}>
+					<div className={classes.NoteEdit}>
+						<CiEdit />
+					</div>
+					<div onClick={onDelete} className={classes.NoteDelete}>
+						<CiTrash />
+					</div>
+				</div>
+			</div>
+			<span className={classes.NoteUnderline}></span>
+		</div>
+	)
+}
 
-export default Note;
+export default Note

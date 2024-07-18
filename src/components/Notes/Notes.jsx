@@ -1,59 +1,56 @@
-import React, { useState } from 'react';
-import Note from './Note/Note';
-import classes from './Notes.module.css';
+import React, { useState } from 'react'
+import { MdOutlinePlaylistAdd } from 'react-icons/md'
+import Note from './Note/Note'
+import classes from './Notes.module.css'
 
-const Notes = () => {
-  const getRandomID = () => {
-    let x = Math.random() * 10 ** 10;
-    let id = Math.round(x).toString(36);
-    return id;
-  };
+const Notes = props => {
+	const [notes, setNotes] = useState([])
+	const [noteText, setNoteText] = useState('')
 
-  const initialNotes = [
-    {
-      _id: getRandomID(),
-      isChecked: false,
-      typedText: '',
-    },
-    {
-      _id: getRandomID(),
-      isChecked: false,
-      typedText: '',
-    },
-    {
-      _id: getRandomID(),
-      isChecked: false,
-      typedText: '',
-    },
-  ];
+	const addNoteHandler = () => {
+		if (noteText.trim() === '') return
+		setNotes(prevNotes => [
+			{ id: Date.now(), text: noteText, isChecked: false },
+			...prevNotes
+		])
+		setNoteText('')
+	}
 
-  const [notes, setNotes] = useState(initialNotes);
+	const isCheckedHandler = id => {
+		setNotes(prevNotes =>
+			prevNotes.map(n => (n.id === id ? { ...n, isChecked: !n.isChecked } : n))
+		)
+	}
 
-  const toggleCheck = (id) => {
-    setNotes((prevNotes) =>
-      prevNotes.map((n) =>
-        n._id === id ? { ...n, isChecked: !n.isChecked } : n
-      )
-    );
-  };
+	const deleteNoteHandler = id => {
+		setNotes(prevNotes => prevNotes.filter(n => n.id !== id))
+	}
 
-  const deleteNote = (id) => {
-    setNotes((prevNotes) => prevNotes.filter((n) => n._id !== id));
-  };
+	const handleKeyPress = (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			addNoteHandler()
+		}
+	}
 
-  return (
-    <div className={classes.Notes}>
-      {notes.map((n) => (
-        <Note
-          key={n._id}
-          note={n}
-          toggleCheck={() => toggleCheck(n._id)}
-          deleteNote={() => deleteNote(n._id)}
-        />
-      ))}
-      <span className={classes.underline}></span>
-    </div>
-  );
-};
+	return (
+		<div className={classes.Notes}>
+			<div className={classes.NotesInput}>
+				<textarea
+					value={noteText}
+					onChange={e => setNoteText(e.target.value)}
+					placeholder='Add note...'
+					onKeyPress={handleKeyPress}
+				></textarea>
+				<button onClick={addNoteHandler}>
+					<MdOutlinePlaylistAdd />
+				</button>
+			</div>
+			{notes.map((n, i) => (
+				<Note key={i} note={n} isChecked={() => isCheckedHandler(n.id)} onDelete={() => deleteNoteHandler(n.id)}/>
+			))}
+		</div>
+	)
+}
 
-export default Notes;
+export default Notes
