@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 520px;
 	margin-top: 20px;
-	transition: .2s;
+	transition: 0.2s;
 }
 
 .NoteContainer:hover {
@@ -17,8 +17,6 @@
 	padding-inline: 20px;
 }
 
-
-
 .NoteLeft {
 	display: flex;
 	align-items: center;
@@ -30,14 +28,14 @@
 	width: 20px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #6C63FF;
+	border-color: #6c63ff;
 	border-radius: 5px;
 
 	cursor: pointer;
 }
 
 .Checked {
-	background-color: #6C63FF;
+	background-color: #6c63ff;
 }
 
 .textChecked {
@@ -64,19 +62,35 @@
 	font-size: 20px;
 }
 
-.NoteEdit, .NoteDelete {
+.NoteEdit,
+.NoteDelete {
 	cursor: pointer;
 	transition: 0.1s;
 }
 
-.NoteEdit:hover, .NoteDelete:hover {
+.NoteEdit:hover,
+.NoteDelete:hover {
 	transform: scale(1.5);
 }
 
-
 .NoteUnderline {
 	width: 100%;
-	background-color: #6C63FF;
+	background-color: #6c63ff;
 	height: 1px;
 	opacity: 0.5;
+}
+
+.EditInput {
+	border: none;
+	outline: none;
+	background-color: inherit;
+	color: inherit;
+	font-size: inherit;
+	margin-block: 1em;
+	padding: 0;
+}
+
+.IsEdit {
+	border-color: red;
+	background-color: red;
 }

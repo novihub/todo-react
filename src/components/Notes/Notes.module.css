@@ -45,3 +45,7 @@
 	opacity: 0.5;
 	cursor: pointer;
 }
+
+.NotesInput>textarea:focus + .IsActive {
+	opacity: 1;
+}

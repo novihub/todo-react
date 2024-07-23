@@ -26,7 +26,7 @@ const Notes = props => {
 		setNotes(prevNotes => prevNotes.filter(n => n.id !== id))
 	}
 
-	const handleKeyPress = (e) => {
+	const handleKeyPress = e => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			addNoteHandler()
@@ -42,12 +42,20 @@ const Notes = props => {
 					placeholder='Add note...'
 					onKeyPress={handleKeyPress}
 				></textarea>
-				<button onClick={addNoteHandler}>
+				<button
+					className={noteText.trim() !== '' ? classes.IsActive : ''}
+					onClick={addNoteHandler}
+				>
 					<MdOutlinePlaylistAdd />
 				</button>
 			</div>
-			{notes.map((n, i) => (
-				<Note key={i} note={n} isChecked={() => isCheckedHandler(n.id)} onDelete={() => deleteNoteHandler(n.id)}/>
+			{notes.map(n => (
+				<Note
+					key={n.id}
+					note={n}
+					isChecked={() => isCheckedHandler(n.id)}
+					onDelete={() => deleteNoteHandler(n.id)}
+				/>
 			))}
 		</div>
 	)

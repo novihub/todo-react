@@ -4,4 +4,21 @@
 
 .Header h1 {
 	margin-top: 40px;
+	z-index: 1;
+	user-select: none;
+}
+
+.NoteAuthor {
+	position: relative;
+	top: -41px;
+	left: 50px;
+	z-index: 0;
+	opacity: 0;
+	transition: 1s;
+	pointer-events: none;
+}
+
+.Header>h1:hover + .NoteAuthor {
+	opacity: 1;
+	left: 140px;
 }
