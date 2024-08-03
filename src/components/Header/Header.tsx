@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 import classes from './Header.module.css'
 
-const Header = props => {
+interface HeaderProps {}
+
+const Header: React.FC<HeaderProps> = () => {
 	return (
 		<div className={classes.Header}>
 			<h1>TODO REACT</h1>

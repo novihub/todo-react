@@ -3,8 +3,17 @@ import { CiEdit, CiTrash } from 'react-icons/ci'
 import { FaCheck } from 'react-icons/fa6'
 
 import classes from './Note.module.css'
+import { INote } from '../Notes'
 
-const Note = ({ note, isChecked, onDelete }) => {
+
+
+interface NoteProps {
+	note: INote
+	isChecked: () => void
+	onDelete: () => void
+}
+
+const Note: React.FC<NoteProps> = ({ note, isChecked, onDelete }) => {
 	const [isEdit, setIsEdit] = useState(false)
 	const [noteText, setNoteText] = useState(note.text)
 
@@ -17,11 +26,13 @@ const Note = ({ note, isChecked, onDelete }) => {
 		if (noteText === '') return onDelete()
 	}
 
-	const deactivateEditTextByKey = e => {
+	const deactivateEditTextByKey = (
+		e: React.KeyboardEvent<HTMLInputElement>
+	) => {
 		if (e.key === 'Enter') return setIsEdit(false)
 	}
 
-	const handleNoteTextChange = e => {
+	const handleNoteTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNoteText(e.currentTarget.value)
 	}
 
@@ -67,9 +78,7 @@ const Note = ({ note, isChecked, onDelete }) => {
 				</div>
 			</div>
 			<span
-				className={`${classes.NoteUnderline} ${
-					isEdit ? classes.IsEdit : ''
-				}`}
+				className={`${classes.NoteUnderline} ${isEdit ? classes.IsEdit : ''}`}
 			></span>
 		</div>
 	)
